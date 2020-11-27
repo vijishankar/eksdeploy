@@ -1,40 +1,11 @@
----
 apiVersion: v1
-kind: Deployment
+kind: Pod
 metadata:
-  name: hello-blue-whale
+  name: nginx
 spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: hello-whale-app
-      version: blue
-  template:
-    metadata:
-      name: hello-blue-whale-pod
-      labels:
-        app: hello-whale-app
-        version: blue
-    spec:
-      containers:
-      - name: hello-whale-container
-        image: tutum/hello-world
-        imagePullPolicy: Always
-        ports:
+  containers:
+    - image: nginx
+      name: nginx
+      ports:
         - containerPort: 80
----
-apiVersion: v1
-kind: Service 
-metadata:
-  name: hello-whale-svc
-  labels: 
-    app: hello-whale-app
-spec:
-  selector:
-    app: hello-whale-app
-    version: blue
-  type: NodePort
-  ports:
-  - nodePort: 31113
-    port: 80
-    targetPort: 80
+          name: http
